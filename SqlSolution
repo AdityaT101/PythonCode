@@ -6,35 +6,35 @@ based on those 2 digits, I use the case clause to filter on year
 
 
 select 
-		 s.user_name,
-		 SUM(
-				 case
-						when s.year_t = 19 then 1 else 0
-				 end 
-		 ) as '2019' ,
-		 
-		 SUM(
-				 case
-						when s.year_t = 20 then 1 else 0
-				 end 
-		 ) as '2020' , 
-		 
-		 SUM(
-				 case
-						when s.year_t = 21 then 1 else 0
-				 end 
-		 ) as '2021'
+	 s.user_name,
+	 SUM(
+			 case
+					when s.year_t = 19 then 1 else 0
+			 end 
+	 ) as '2019' ,
+
+	 SUM(
+			 case
+					when s.year_t = 20 then 1 else 0
+			 end 
+	 ) as '2020' , 
+
+	 SUM(
+			 case
+					when s.year_t = 21 then 1 else 0
+			 end 
+	 ) as '2021'
 	  
 from	 
-		( 
-			SELECT
-					u.user_name,
-					SUBSTR(t.transaction_id,1,2) as 'year_t'
-			FROM 
-				 Transactions t left join users u on t.user_id = u.user_id
-			having year_t in (19,20,21)
-			
-		) as s
+	( 
+		SELECT
+				u.user_name,
+				SUBSTR(t.transaction_id,1,2) as 'year_t'
+		FROM 
+			 Transactions t left join users u on t.user_id = u.user_id
+		having year_t in (19,20,21)
+
+	) as s
 	
 	
 GROUP BY s.user_name ,'2019','2020','2021'
