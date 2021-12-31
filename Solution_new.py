@@ -12,7 +12,14 @@ class Solution() :
 
         # Using the api end point by by iterating through all the pages from 1 to 16
         # so that we get a cumulative data for dataframe,
-        for x in range(1,17):
+         
+        end = 0
+        if transactionType == 'debit':
+            end = 17
+        else:
+            end = 16
+            
+        for x in range(1,end):
 
                 # retriving the data using API end point.
                 text = ("https://jsonmock.hackerrank.com/api/transactions/search?txnType={}&page={}".format(transactionType , x) )
